@@ -1,66 +1,64 @@
-# Reto Técnico: Procesamiento de Transacciones Bancarias (CLI)
+# Procesamiento de Transacciones Bancarias (CLI)
 
-## Objetivo:
+## Introducción
+Este proyecto es una aplicación de línea de comandos (CLI) que procesa archivos CSV con transacciones bancarias y genera reportes con información relevante como balance final, transacción de mayor monto y conteo de transacciones por tipo. Fue desarrollado como parte de un reto técnico para Interbank Academy.
 
-Desarrolla una aplicación de línea de comandos (CLI) que procese un archivo CSV con transacciones bancarias y genere un reporte que incluya:
+## Instrucciones de Ejecución
 
-- **Balance Final:**  
-  Suma de los montos de las transacciones de tipo "Crédito" menos la suma de los montos de las transacciones de tipo "Débito".
+### Requisitos
+- .NET 6.0 o superior
+- Archivo CSV con transacciones (formato: ID,Tipo,Monto)
 
-- **Transacción de Mayor Monto:**  
-  Identificar el ID y el monto de la transacción con el valor más alto.
+### Ejecución
+1. Clona el repositorio o descarga el código fuente
+2. Navega a la carpeta del proyecto
+3. Ejecuta el programa con: dotnet run
+4. Sigue las instrucciones en pantalla:
+- Ingresa la ruta del archivo CSV o presiona Enter para usar la ruta por defecto (`../data.csv`)
+- Selecciona las opciones del menú para generar diferentes reportes
 
-- **Conteo de Transacciones:**  
-  Número total de transacciones para cada tipo ("Crédito" y "Débito").
+## Enfoque y Solución
 
----
+### Lógica Implementada
+- **Procesamiento de CSV**: El programa lee archivos CSV con validación de formato
+- **Cálculos**:
+- Balance final: Suma de créditos menos débitos
+- Transacción mayor monto: Búsqueda del valor máximo
+- Conteo: Agrupación por tipo de transacción
+- **Interfaz de usuario**: Menús interactivos con validación de entrada
 
-## Instrucciones
+### Decisiones de Diseño
+- **Estructura modular**: Separación clara entre lógica de negocio, procesamiento e interfaz
+- **Validaciones**: Verificación de existencia de archivos y formato correcto de datos
+- **Experiencia de usuario**: Mensajes claros, manejo de errores y opción de ruta por defecto
 
-1. **Repositorio Base:**  
-   Clona o haz un fork del repositorio base disponible en:  
-   `https://github.com/codeableorg/interbank-academy-25`
+## Estructura del Proyecto
 
-2. **Entrada de Datos:**  
-   La aplicación deberá leer un archivo CSV. Ejemplo de contenido:
+    InterbankAcademy/
+    ├── src/          # Carpeta main
+    ├──────Program.cs         # Lógica principal y menús
+    └── data.csv              # Archivo de ejemplo (opcional)
 
-   ```
-   id,tipo,monto
-   1,Crédito,100.00
-   2,Débito,50.00
-   3,Crédito,200.00
-   4,Débito,75.00
-   5,Crédito,150.00
-   ```
+### Clases Principales
+- `Transaccion`: Modelo de datos para las transacciones (ID, Tipo, Monto)
+- `Program`: Contiene toda la lógica de procesamiento y generación de reportes
 
-3. **Salida del Programa:**  
-   La aplicación debe mostrar el reporte final en la terminal.  
-   Ejemplo de salida:
+### Requisitos del formato:
+- **Encabezados exactos**: `ID`, `Tipo`, `Monto` (en ese orden)
+- **Tipos de transacción**: Debe ser `Crédito` o `Débito` (no sensible a mayúsculas)
+- **Formato numérico**:
+  - ID: Número entero
+  - Monto: Decimal (punto como separador decimal)
+- **Codificación**: UTF-8 (recomendado)
+- **Separación**: Debe estar separado por comas
 
-   ```
-   Reporte de Transacciones
-   ---------------------------------------------
-   Balance Final: 325.00
-   Transacción de Mayor Monto: ID 3 - 200.00
-   Conteo de Transacciones: Crédito: 3 Débito: 2
-   ```
+### Ejemplo mínimo válido:
+```csv
+ID,Tipo,Monto
+1,Crédito,150.75
+2,Débito,50.00
+```
 
-4. **Lenguaje de Programación:**  
-   Utiliza el lenguaje de tu preferencia. Opciones recomendadas:
-
-   - Python
-   - Java
-   - C#
-   - JavaScript (Node.js)
-
-5. **README del Proyecto:**  
-   Incluye un archivo `README.md` con la siguiente estructura:
-
-   - **Introducción:** Breve descripción del reto y su propósito.
-   - **Instrucciones de Ejecución:** Cómo instalar dependencias y ejecutar la aplicación.
-   - **Enfoque y Solución:** Lógica implementada y decisiones de diseño.
-   - **Estructura del Proyecto:** Archivos y carpetas principales.
-
-6. **Documentación y Calidad del Código:**
-   - Código bien documentado y fácil de leer.
-   - Comentarios explicando pasos clave y lógica del programa.
+## Mejoras Futuras
+- Utilizar el patrón de diseño strategy para tener mas ordenado el código.
+- Mejorar la seguridad al procesar archivos evitando la carga de archivos maliciosos.
